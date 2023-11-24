@@ -1,15 +1,17 @@
 import './App.css';
-import Cards from './components/Cards.jsx';
-import Nav from './components/Nav.jsx';
+import Cards from './components/Cards/Cards.jsx';
+import Nav from './components/Nav/Nav.jsx';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
+import { Route, Routes } from 'react-router-dom';
+import About from './views/About/About.jsx';
+import Detail from "./views/Detail/Detail.jsx"
 
 const URL = "https://rym2.up.railway.app/api/character/";
-const API_KEY = "henrystaff";
+export const API_KEY = "henrystaff";
 
 function App() {
    const [characters, setCharacters] = useState([]);
-   const [randomCharacter, setRandomCharacter] = useState(null);
 
    const addCharacter = (newCharacter) => {
       const idExist = characters.some(personaje => personaje.id === newCharacter.id);
@@ -35,21 +37,15 @@ function App() {
    const onClose = (id) => {
       setCharacters(characters.filter((element) => element.id !== Number(id)));
    };
-
-   const obtenerPersonajeAleatorio = () => {
-      const randomId = Math.floor(Math.random() * 826) + 1;
-      axios(`${URL}${randomId}?key=${API_KEY}`).then(
-         ({ data }) => {
-            addCharacter(data);
-         }
-      );
-   };
    
    return (
       <div className='App'>
-         <Nav onSearch={onSearch} obtenerPersonajeAleatorio = {obtenerPersonajeAleatorio}/>
-         {randomCharacter && <Cards characters={[randomCharacter]} onClose={onClose} />}
-         <Cards characters={characters} onClose={onClose} />
+         <Nav onSearch={onSearch}/>
+         <Routes>
+            <Route path='/home' element={<Cards characters={characters} onClose={onClose} />}/>
+            <Route path='/about' element={<About/>}/>
+            <Route path='/detail/:id' element= {<Detail/>}/>
+         </Routes>
       </div>
    );
 }
