@@ -5,7 +5,7 @@ import { useState , useEffect} from 'react'
 import { API_KEY } from '../../App'
 
 export default function Detail() {
-    const [character, setCharacter] = useState()
+    const [character, setCharacter] = useState({})
     const {id} = useParams()
 
     useEffect(() => {
@@ -23,7 +23,12 @@ export default function Detail() {
 
   return (
     <div>
-        Detail
+        <h1>Name: {character.name}</h1>
+        <h3>Status: {character.status}</h3>
+        <h3>Specie: {character.species}</h3>
+        <h3>Gender: {character.gender}</h3>
+        <h3>Origin: {character.origin?.name}</h3>
+        <img src={character.image} alt={character.name} />
     </div>
   )
 }
