@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import validate from './validation'
 
-export default function Form (){
+export default function Form ({login}){
 
     const [errors, setErrors] = useState({})
     const [userData, setUserData] = useState({email: "", password: ""})
@@ -14,9 +14,17 @@ export default function Form (){
         }))
     }
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        if (Object.keys(errors).length === 0) {
+            // No hay errores de validación, proceder con el inicio de sesión
+            login(userData);
+        }
+     };
+
     return (
         <div>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label htmlFor="email">email</label>
                 <input type='email' key="email" id='email' name='email' value={userData.email} onChange={handleChange}/>
                 <p>{errors.name ? errors.name : null}</p>

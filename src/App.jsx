@@ -3,11 +3,12 @@ import Cards from './components/Cards/Cards.jsx';
 import Nav from './components/Nav/Nav.jsx';
 import React, { useEffect, useState } from 'react';
 import axios from "axios";
-import { Route, Routes, useLocation} from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate} from 'react-router-dom';
 import About from './views/About/About.jsx';
 import Detail from "./views/Detail/Detail.jsx"
 import NotFound from './components/NotFound.jsx';
 import Form from './components/Form/Form.jsx';
+import validate from './components/Form/validation.js'; //!Esta parte es de GPT
 
 const URL = "https://rym2.up.railway.app/api/character/";
 export const API_KEY = "henrystaff";
@@ -17,6 +18,9 @@ function App() {
    const {pathname} = location
    const [characters, setCharacters] = useState([]);
    const [access, setAccess] = useState(false)
+   const navigate = useNavigate()
+   const EMAIL = "example@gmail.com"
+   const PASSWORD = "Aaaa$1"
 
 
    const addCharacter = (newCharacter) => {
@@ -43,7 +47,30 @@ function App() {
    const onClose = (id) => {
       setCharacters(characters.filter((element) => element.id !== Number(id)));
    };
-   
+
+   function login(userData) {
+      if (userData.password === PASSWORD && userData.email === EMAIL) {
+          setAccess(true)
+          navigate("/home")
+      }else {
+         alert ("Credenciales incorrectas")
+      }
+   };
+
+   //* REDIRECTION TO LOGIN OR HOME
+   useEffect(() => {
+      !access && navigate("/")
+      /* !access && navigate("/home") */
+
+      if (pathname !== "/" && pathname !== "/home" && pathname !== "about") {
+            navigate("/notFound");
+  }}, [access])  
+
+  //*LOGOUT
+  function logout() {
+      setAccess(false)
+  }
+
    return (
       <div className='App'>
          {pathname === "/home" || pathname === "/about" || pathname === "/detail/:id" ? (
@@ -55,7 +82,7 @@ function App() {
             <Route path='/about' element={<About/>}/>
             <Route path='/detail/:id' element= {<Detail/>}/>
             <Route path="*" element= {<NotFound/>}/>
-            <Route path='/' element = {<Form/>}/>
+            <Route path='/' element = {<Form login={login}/>}/>
          </Routes>
       </div>
    );
