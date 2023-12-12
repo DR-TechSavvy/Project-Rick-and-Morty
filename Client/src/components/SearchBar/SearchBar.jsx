@@ -4,7 +4,7 @@ import axios from "axios";
 
 
 export default function SearchBar(props) {
-const URL = "http://localhost:3001/rickandmorty/character/";
+const URL = `http://localhost:3001/api/character`;
    const [id, setId] = useState("");
 
    const handleChange = (event) => {
@@ -12,19 +12,14 @@ const URL = "http://localhost:3001/rickandmorty/character/";
       setId(value)
    }
    
-   const handleRandom = () => {
-      const randomId = Math.floor(Math.random() * 826) + 1;
-      axios(`${URL}${randomId}`).then(
-         ({ data }) => {
-            addCharacter(data);
-         }
-      );
-   };
-
-   // const characterRandom = () => {
+   // const handleRandom = () => {
    //    const randomId = Math.floor(Math.random() * 826) + 1;
-   //    props.onSearch(randomId)
-   // }
+   //    axios(`${URL}/${randomId}`).then(
+   //       ({ data }) => {
+   //          addCharacter(data);
+   //       }
+   //    );
+   // };
 
    return (
       <div>
@@ -36,7 +31,7 @@ const URL = "http://localhost:3001/rickandmorty/character/";
          </Link>
          <input type='search' onChange={handleChange}/>
          <button onClick= { () => props.onSearch (id) } >Agregar</button>
-         <button onClick={ () => handleRandom}>Random</button>
+         <button onClick={props.handleRandom}>Random</button>
 
       </div>
    );

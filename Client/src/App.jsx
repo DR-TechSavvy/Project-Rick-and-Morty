@@ -9,7 +9,7 @@ import Detail from "./views/Detail/Detail.jsx"
 import NotFound from './components/NotFound.jsx';
 import Form from './components/Form/Form.jsx';
 
-// const URL = "http://localhost:3001/rickandmorty/character/";
+
 const URL = "http://localhost:3001/api/character"
 export const API_KEY = "henrystaff"; 
 
@@ -45,6 +45,15 @@ function App() {
       );
    };
 
+   const handleRandom = () => {
+      const randomId = Math.floor(Math.random() * 826) + 1;
+      axios(`${URL}/${randomId}`).then(
+         ({ data }) => {
+            addCharacter(data);
+         }
+      );
+   };
+
    const onClose = (id) => {
       setCharacters(characters.filter((element) => element.id !== Number(id)));
    };
@@ -75,7 +84,7 @@ function App() {
    return (
       <div className='App'>
          {pathname === "/home" || pathname === "/about" || pathname === "/detail/:id" ? (
-         <Nav onSearch={onSearch}/>
+         <Nav onSearch={onSearch} handleRandom={handleRandom}/>
          ):null}
        
          <Routes>

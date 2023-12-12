@@ -1,6 +1,6 @@
-import { API_KEY } from "../../../Client/src/App";
-
 const axios = require("axios");
+
+
 const API = `https://rickandmortyapi.com/api/character`;
 const getCharById = (res, id) => {
     axios
