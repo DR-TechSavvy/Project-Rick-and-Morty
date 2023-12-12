@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import validate from './validation'
+import './Form.css'
 
 export default function Form ({login}){
 
@@ -23,16 +24,28 @@ export default function Form ({login}){
      };
 
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email">email</label>
-                <input type='email' key="email" id='email' name='email' value={userData.email} onChange={handleChange}/>
-                <p>{errors.name ? errors.name : null}</p>
+        <div className='Form_Container'>
+            <form onSubmit={handleSubmit} className='Form_Dates'>
+                <div className='email'>
+                    <label htmlFor="email">Email</label>
+                    <input type='email' key="email" id='email' name='email' value={userData.email} onChange={handleChange}/>
+                    <p>{errors.name ? errors.name : null}</p>
+            
+                </div>
                 <br />
-                <label htmlFor='password'>password</label>
-                <input type='password' key= "password" id='password' name='password' value={userData.password} onChange={handleChange}/>
+                <div className='password'>
+                    <label htmlFor='password'>Password</label>
+                    <input type='password' key= "password" id='password' name='password' value={userData.password} onChange={handleChange}/>
+
+                </div>
                 <br />
-                <button>Submit</button>
+                <div className= "Submit">
+                    <p>
+                <button className='btn-1'>Submit</button>
+
+                    </p>
+
+                </div>
             </form>
         </div>
     )

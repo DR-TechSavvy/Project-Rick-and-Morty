@@ -9,8 +9,9 @@ import Detail from "./views/Detail/Detail.jsx"
 import NotFound from './components/NotFound.jsx';
 import Form from './components/Form/Form.jsx';
 
-const URL = "http://localhost:3001/rickandmorty/character/";
-export const API_KEY = "henrystaff";
+// const URL = "http://localhost:3001/rickandmorty/character/";
+const URL = "http://localhost:3001/api/character"
+export const API_KEY = "henrystaff"; 
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
    };
 
    const onSearch = (id) => {
-      axios(`${URL}${id}`).then(
+      axios(`${URL}/${id}`).then(
          ({ data }) => {
             if (id >= 1 && id <= 826) {
                addCharacter(data);

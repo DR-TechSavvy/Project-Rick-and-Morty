@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 
 export default function SearchBar(props) {
-
+const URL = "http://localhost:3001/rickandmorty/character/";
    const [id, setId] = useState("");
 
    const handleChange = (event) => {
@@ -10,19 +12,19 @@ export default function SearchBar(props) {
       setId(value)
    }
    
-   // const obtenerPersonajeAleatorio = () => {
-   //    const randomId = Math.floor(Math.random() * 826) + 1;
-   //    axios(`${URL}${randomId}?key=${API_KEY}`).then(
-   //       ({ data }) => {
-   //          addCharacter(data);
-   //       }
-   //    );
-   // };
-
-   const characterRandom = () => {
+   const handleRandom = () => {
       const randomId = Math.floor(Math.random() * 826) + 1;
-      props.onSearch(randomId)
-   }
+      axios(`${URL}${randomId}`).then(
+         ({ data }) => {
+            addCharacter(data);
+         }
+      );
+   };
+
+   // const characterRandom = () => {
+   //    const randomId = Math.floor(Math.random() * 826) + 1;
+   //    props.onSearch(randomId)
+   // }
 
    return (
       <div>
@@ -34,7 +36,7 @@ export default function SearchBar(props) {
          </Link>
          <input type='search' onChange={handleChange}/>
          <button onClick= { () => props.onSearch (id) } >Agregar</button>
-         <button onClick={() => characterRandom()}>Random</button>
+         <button onClick={ () => handleRandom}>Random</button>
 
       </div>
    );

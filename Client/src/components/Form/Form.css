@@ -1,0 +1,67 @@
+.Form_Container {
+height: 970px;
+width: 930px;
+background-image: url("../../../public/portal.gif");
+background-size: cover ;
+font-size: large;
+display: flex;
+justify-content: center;
+align-items: center;
+font-size: 1.2rem;
+border-radius: 900px;
+
+}
+
+.Form_Dates{
+    height: 30%;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+.Form_Dates input{
+    height: 45px;
+    width: 400px;
+    color: rgb(0, 0, 0);
+    font-family: cursive;
+    justify-content: center;
+}
+
+.email,.password{
+    display: flex;
+    flex-direction: column;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:xx-large;
+    font-style:oblique;
+    
+}
+
+.Submit{
+    display: flex;
+
+}
+
+.btn-1{
+    text-decoration: none;
+    background-color: #e17612;
+    color: rgb(49, 49, 49);
+    padding: 10px 20px;
+    border-radius: 20px;
+    transition: all .3s ease;
+    width: 90px;
+    height: 50px;
+
+}
+
+.btn-1:hover{
+    background-color: #ffc000;
+    color: black;
+    box-shadow: 
+    0 0 5px #ffc000,
+    0 0 20px #ffc000,
+    0 0 60px #ffc000,
+    0 0 150px #ffc000
+}
